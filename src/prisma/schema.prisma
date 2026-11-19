@@ -7,3 +7,14 @@ output = "../generated/prisma"
 datasource db {
   provider = "postgresql"
 }
+
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("PATIENT")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
