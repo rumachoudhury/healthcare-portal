@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.10.1",
   "engineVersion": "d1b3f377ca835d73fd50954a5e22128b9ebdd6b8",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  role      String   @default(\"PATIENT\")\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -32,10 +32,10 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null,\"schema\":null}},\"enums\":{},\"types\":{}}")
 config.parameterizationSchema = {
-  strings: JSON.parse("[]"),
-  graph: "AAAA"
+  strings: JSON.parse("[\"where\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_count\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"email\",\"password\",\"role\",\"createdAt\",\"updatedAt\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"set\"]"),
+  graph: "KQkQChoAACIAMBsAAAQAEBwAACIAMB0BAAAAAR4BACMAIR8BAAAAASABACMAISEBACMAISJAACQAISNAACQAIQEAAAABACABAAAAAQAgChoAACIAMBsAAAQAEBwAACIAMB0BACMAIR4BACMAIR8BACMAISABACMAISEBACMAISJAACQAISNAACQAIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACAHHQEAAAABHgEAAAABHwEAAAABIAEAAAABIQEAAAABIkAAAAABI0AAAAABAQgAAAkAIAcdAQAAAAEeAQAAAAEfAQAAAAEgAQAAAAEhAQAAAAEiQAAAAAEjQAAAAAEBCAAACwAwAQgAAAsAMAcdAQAoACEeAQAoACEfAQAoACEgAQAoACEhAQAoACEiQAApACEjQAApACECAAAAAQAgCAAADgAgBx0BACgAIR4BACgAIR8BACgAISABACgAISEBACgAISJAACkAISNAACkAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgAxUAACUAIBYAACcAIBcAACYAIAoaAAAaADAbAAAXABAcAAAaADAdAQAbACEeAQAbACEfAQAbACEgAQAbACEhAQAbACEiQAAcACEjQAAcACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAoaAAAaADAbAAAXABAcAAAaADAdAQAbACEeAQAbACEfAQAbACEgAQAbACEhAQAbACEiQAAcACEjQAAcACEOFQAAHgAgFgAAIQAgFwAAIQAgJAEAAAABJQEAAAAEJgEAAAAEJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAIAAhLAEAAAABLQEAAAABLgEAAAABCxUAAB4AIBYAAB8AIBcAAB8AICRAAAAAASVAAAAABCZAAAAABCdAAAAAAShAAAAAASlAAAAAASpAAAAAAStAAB0AIQsVAAAeACAWAAAfACAXAAAfACAkQAAAAAElQAAAAAQmQAAAAAQnQAAAAAEoQAAAAAEpQAAAAAEqQAAAAAErQAAdACEIJAIAAAABJQIAAAAEJgIAAAAEJwIAAAABKAIAAAABKQIAAAABKgIAAAABKwIAHgAhCCRAAAAAASVAAAAABCZAAAAABCdAAAAAAShAAAAAASlAAAAAASpAAAAAAStAAB8AIQ4VAAAeACAWAAAhACAXAAAhACAkAQAAAAElAQAAAAQmAQAAAAQnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAgACEsAQAAAAEtAQAAAAEuAQAAAAELJAEAAAABJQEAAAAEJgEAAAAEJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAIQAhLAEAAAABLQEAAAABLgEAAAABChoAACIAMBsAAAQAEBwAACIAMB0BACMAIR4BACMAIR8BACMAISABACMAISEBACMAISJAACQAISNAACQAIQskAQAAAAElAQAAAAQmAQAAAAQnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAhACEsAQAAAAEtAQAAAAEuAQAAAAEIJEAAAAABJUAAAAAEJkAAAAAEJ0AAAAABKEAAAAABKUAAAAABKkAAAAABK0AAHwAhAAAAAS8BAAAAAQEvQAAAAAEAAAAAAxUABhYABxcACAAAAAMVAAYWAAcXAAgBAgECAwEFBgEGBwEHCAEJCgEKDAILDQMMDwENEQIOEgQREwESFAETFQIYGAUZGQk"
 }
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
@@ -188,7 +188,15 @@ export interface PrismaClient<
     extArgs: ExtArgs
   }>>
 
-    
+      /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {
