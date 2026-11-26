@@ -81,6 +81,9 @@ export async function POST(request: NextRequest) {
       select: { id: true, role: true },
     });
 
+    console.log("DEBUG doctorId:", doctorId);
+    console.log("DEBUG doctor:", doctor);
+
     if (!patient || patient.role !== "PATIENT") {
       return NextResponse.json(
         { error: "Valid patient not found." },
